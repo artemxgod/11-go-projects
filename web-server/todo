@@ -1,0 +1,3 @@
+additional
+1. load new template with name and address after clicking submit in /form
+2. create auth middleware, so name from /form can be saved and displayed in /hello
