@@ -14,7 +14,7 @@
 
 * Contains webserver implementation as well as storage and data models
 
-* `/webserver`
- * webserver.go initialize and start the server
- * server.go configures router and storage
- * config contains data for server configuration. The data should be predetermined
+- `/webserver`
+    - webserver.go initialize and start the server
+    - server.go configures router and storage
+    - config contains data for server configuration. The data should be predetermined
