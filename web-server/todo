@@ -1,3 +1,4 @@
+1. Create a web server that handles / /hello /form routes
 additional
 1. load new template with name and address after clicking submit in /form -- done
 2. create auth middleware, so name from /form can be saved and displayed in /hello -- done

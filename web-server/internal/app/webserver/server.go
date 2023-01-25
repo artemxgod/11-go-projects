@@ -53,7 +53,6 @@ func (s *server) configureRouter() {
 	private := s.router.PathPrefix("/private").Subrouter()
 	private.Use(s.authenticateUser)
 	private.Handle("/hello", s.handleHelloPage()).Methods("GET")
-
 }
 
 func (s *server) authenticateUser(next http.Handler) http.Handler {
