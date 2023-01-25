@@ -1,0 +1,7 @@
+Main task:
+1. Create a server that handles requests:
+    get movies
+    get movie
+    create movie
+    update movie
+    delete movie
