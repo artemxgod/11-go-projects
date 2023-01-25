@@ -45,5 +45,5 @@
     - `/form` has information form. 
     After filling gaps and clicking submit `/form/new` route will be opened and will display user information.
     Also it creates a cookie, so we can reach `private/hello`
-    - `/private/hello` says hello to user. It requares user name. 
+    - `/private/hello` says hello to user. It requires user name. 
     Can't reach the route before filling form in `/form`
