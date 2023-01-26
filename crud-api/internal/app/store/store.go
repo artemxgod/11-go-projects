@@ -7,9 +7,9 @@ type Store interface {
 }
 
 type MovieRepository interface {
-	Create(*model.Movie)
+	Create(*model.Movie) error
 	// Update(int)
 	Delete(int) error
 	Find(int) (*model.Movie, error)
-	Get() (model.Movies)
+	Get() model.Movies
 }

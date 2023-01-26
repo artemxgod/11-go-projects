@@ -14,8 +14,13 @@ func (r *movieRepository) Get() model.Movies {
 	return r.movies
 }
 
-func (r *movieRepository) Create(mov *model.Movie) {
+func (r *movieRepository) Create(mov *model.Movie) error {
+	if err := mov.Validate(); err != nil {
+		return err
+	}
+
 	r.movies = append(r.movies, mov)
+	return nil
 }
 
 func (r *movieRepository) Delete(ID int) error {
@@ -23,12 +28,12 @@ func (r *movieRepository) Delete(ID int) error {
 		return err
 	} else {
 		for idx, movie := range r.movies {
-			if movie.ID	== ID {
+			if movie.ID == ID {
 				r.movies = append(r.movies[:idx], r.movies[idx+1:]...)
-				break;
+				break
 			}
 		}
-		return nil	
+		return nil
 	}
 }
 
@@ -37,7 +42,7 @@ func (r *movieRepository) Find(ID int) (*model.Movie, error) {
 		return &model.Movie{}, err
 	} else {
 		for idx, movie := range r.movies {
-			if movie.ID	== ID {
+			if movie.ID == ID {
 				return r.movies[idx], nil
 			}
 		}

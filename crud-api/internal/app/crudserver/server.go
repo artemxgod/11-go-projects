@@ -53,9 +53,9 @@ func (s *server) handleGetMovie() http.HandlerFunc {
 			s.error(w, r, http.StatusBadRequest, err)
 			return
 		}
-		
-		 mov, err := s.store.Movie().Find(p_id) 
-		 if err != nil {
+
+		mov, err := s.store.Movie().Find(p_id)
+		if err != nil {
 			s.error(w, r, http.StatusNotFound, err)
 			return
 		}
@@ -66,8 +66,8 @@ func (s *server) handleGetMovie() http.HandlerFunc {
 
 func (s *server) handleCreateMovie() http.HandlerFunc {
 	type request struct {
-		Isbn     string    `json:"isbn"`
-		Title    string    `json:"title"`
+		Isbn     string          `json:"isbn"`
+		Title    string          `json:"title"`
 		Director *model.Director `json:"director"`
 	}
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -79,34 +79,37 @@ func (s *server) handleCreateMovie() http.HandlerFunc {
 		}
 
 		mov := &model.Movie{
-			ID: len(s.store.Movie().Get()) + 1,
-			Isbn: req.Isbn,
-			Title: req.Title,
+			ID:       len(s.store.Movie().Get()) + 1,
+			Isbn:     req.Isbn,
+			Title:    req.Title,
 			Director: req.Director,
 		}
 
-		s.store.Movie().Create(mov)
+		if err := s.store.Movie().Create(mov); err != nil {
+			s.error(w, r, http.StatusUnprocessableEntity, err)
+			return
+		}
 		s.respond(w, r, http.StatusCreated, mov)
 	}
 }
 
 func (s *server) handleUpdateMovie() http.HandlerFunc {
 	type request struct {
-		Isbn     string    `json:"isbn"`
-		Title    string    `json:"title"`
+		Isbn     string          `json:"isbn"`
+		Title    string          `json:"title"`
 		Director *model.Director `json:"director"`
 	}
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
 		// parsing {id} from route
-		params := mux.Vars(r) 
+		params := mux.Vars(r)
 		p_id, err := strconv.Atoi(params["id"])
 		if err != nil {
 			s.error(w, r, http.StatusBadRequest, err)
 			return
 		}
-		
+
 		if err := s.store.Movie().Delete(p_id); err != nil {
 			s.error(w, r, http.StatusNotFound, err)
 			return
@@ -119,13 +122,16 @@ func (s *server) handleUpdateMovie() http.HandlerFunc {
 		}
 
 		mov := &model.Movie{
-			ID: p_id,
-			Isbn: req.Isbn,
-			Title: req.Title,
+			ID:       p_id,
+			Isbn:     req.Isbn,
+			Title:    req.Title,
 			Director: req.Director,
 		}
 
-		s.store.Movie().Create(mov)
+		if err := s.store.Movie().Create(mov); err != nil {
+			s.error(w, r, http.StatusUnprocessableEntity, err)
+			return
+		}
 		s.respond(w, r, http.StatusOK, mov)
 	}
 }
@@ -140,7 +146,7 @@ func (s *server) handleDeleteMovie() http.HandlerFunc {
 			s.error(w, r, http.StatusBadRequest, err)
 			return
 		}
-		
+
 		if err := s.store.Movie().Delete(p_id); err != nil {
 			s.error(w, r, http.StatusNotFound, err)
 			return
@@ -155,9 +161,8 @@ func (s *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *server) error(w http.ResponseWriter, r *http.Request, code int, err error) {
-	s.respond(w, r, code, err)
+	s.respond(w, r, code, map[string]string{"error": err.Error()})
 }
-
 
 func (s *server) respond(w http.ResponseWriter, r *http.Request, code int, data interface{}) {
 	w.WriteHeader(code)
