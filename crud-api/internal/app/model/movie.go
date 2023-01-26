@@ -1,10 +1,10 @@
 package model
 
 type Movie struct {
-	ID       string    `json:"id"`
-	Isnb     string    `json:"isnb"`
+	ID       int    `json:"id"`
+	Isbn     string    `json:"isbn"`
 	Title    string    `json:"title"`
 	Director *Director `json:"director"`
 }
 
-type Movies []Movie
+type Movies []*Movie

@@ -1,7 +1,10 @@
 Main task:
-1. Create a server that handles requests:
+1. Create a server that handles requests: -- done
     get movies
     get movie
     create movie
     update movie
     delete movie
+Additional:
+1. Data validation
+2. Testing

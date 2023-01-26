@@ -1,9 +1,15 @@
 package crudserver
 
-import "net/http"
+import (
+	"net/http"
+
+	"github.com/artemxgod/11-go-projects/crudserver/internal/app/store/teststore"
+)
 
 func Start(cfg *Config) error {
-	s := newServer()
+	db := teststore.New()
+
+	s := newServer(db)
 
 	return http.ListenAndServe(cfg.BindAddr, s)
 }

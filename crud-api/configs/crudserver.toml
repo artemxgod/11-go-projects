@@ -1,1 +1,1 @@
-bind_addr = "8000"
+bind_addr = ":8000"
