@@ -42,5 +42,5 @@
     - `POST /movies` creates new movie. Movie data should be passed in json format with the request. 
     Respond with new data in json or error.
     - `PUT /movies/{id}` changes matching with id movie's data. Respond with updated data in json or error
-    - `DELETE /movies/{id}` delete matching with id movie. Respond with the list of remaining movies in json or error
+    - `DELETE /movies/{id}` deletes matching with id movie. Respond with the list of remaining movies in json or error
     
