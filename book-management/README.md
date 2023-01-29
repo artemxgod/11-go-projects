@@ -30,7 +30,7 @@
 
 * Server handle request on path `/book/` differently for each method
     - `GET /book/` responds with list of books
-    Respond example:
+    - Respond example:
     ```json
     [
         {
@@ -54,7 +54,7 @@
     ]
     ```
     - `GET /book/{id}` seeking for book in db and responds with a matching `id` book
-    Respond example:
+    - Respond example:
     ```json
     {
     "ID": 1,
@@ -67,7 +67,7 @@
     }
     ```
     - `POST /book/` creates a new book in db. Book data should be passed in json format with the request. 
-    Respond example:
+    - Respond example:
     ```json
     {
     "ID": 2,
@@ -80,7 +80,7 @@
     }
     ```
     - `PUT /book/{id}` changes matching with id movie's data. Respond with updated data in json or error
-    Respond example:
+    - Respond example:
     ```json
     {
     "ID": 1,
@@ -93,7 +93,7 @@
     }
     ```
     - `DELETE /book/{id}` delete matching with id book from db. Respond with what left from it in database
-    Respond example:
+    - Respond example:
     ```json
     {
     "ID": 0,
