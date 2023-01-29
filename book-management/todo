@@ -1,0 +1,8 @@
+1. Main task:
+    - Create web book store that handles following requests using mySQL:
+        * Get books
+        * Create books
+        * Get book by id
+        * Update book
+        * Delete book
+2. Additional:
