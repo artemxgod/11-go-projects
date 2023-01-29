@@ -20,6 +20,10 @@
 
 - `/model` keeps book model and connects to database
 
+- `/routes` has router func with all handlers
+
+- `/utils` implements body parsing that is used in `/controllers`
+
 
 ### `/scheme`
 
@@ -53,7 +57,7 @@
         }
     ]
     ```
-    - `GET /book/{id}` seeking for book in db and responds with a matching `id` book
+    - `GET /book/{id}` seeks for book in db and responds with a matching `id` book
     - Respond example:
     ```json
     {
@@ -92,7 +96,7 @@
     "publication": "Nemo prod"
     }
     ```
-    - `DELETE /book/{id}` delete matching with id book from db. Respond with what left from it in database
+    - `DELETE /book/{id}` deletes matching with id book from db. Respond with what left from it in database
     - Respond example:
     ```json
     {
