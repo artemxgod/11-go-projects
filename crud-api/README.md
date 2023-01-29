@@ -24,7 +24,7 @@
     - store.go contains store interface, so we can use different type of storages. 
     Here i am using map as a storage. SQL databases can be used as well
 
-- `model`
+- `/model`
     - movie.go contains movie structure and validation for its fields.
     - director.go contains director structure.
 
