@@ -43,6 +43,12 @@ func GetBookByID(ID int64) (*Book, *gorm.DB) {
 	return &res, db
 }
 
+func GetBooksByAuthor(name string) []Book {
+	var res []Book
+	db.Where("author=?", name).Find(&res)
+	return res
+}
+
 func DeleteBook(ID int64) Book {
 	var res Book
 	db.Where("ID=?", ID).Delete(&res)

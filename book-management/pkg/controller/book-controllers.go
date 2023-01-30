@@ -12,9 +12,9 @@ import (
 
 var NewBook model.Book
 
-func GetBooks() http.HandlerFunc  {
+func GetBooks() http.HandlerFunc {
 
-	return func(w http.ResponseWriter, r *http.Request ) {
+	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		newbook := model.GetAllBooks()
 
@@ -27,9 +27,9 @@ func GetBooks() http.HandlerFunc  {
 	}
 }
 
-func CreateBook() http.HandlerFunc  {
+func CreateBook() http.HandlerFunc {
 
-	return func(w http.ResponseWriter, r *http.Request ) {
+	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		b := &model.Book{}
 		if err := utils.ParseBody(r, b); err != nil {
@@ -38,7 +38,7 @@ func CreateBook() http.HandlerFunc  {
 		}
 
 		b.CreateBook()
-		
+
 		if err := json.NewEncoder(w).Encode(b); err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			return
@@ -48,9 +48,9 @@ func CreateBook() http.HandlerFunc  {
 	}
 }
 
-func GetBookByID() http.HandlerFunc  {
+func GetBookByID() http.HandlerFunc {
 
-	return func(w http.ResponseWriter, r *http.Request ) {
+	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
 		params := mux.Vars(r)
@@ -70,9 +70,9 @@ func GetBookByID() http.HandlerFunc  {
 	}
 }
 
-func UpdateBook() http.HandlerFunc  {
+func UpdateBook() http.HandlerFunc {
 
-	return func(w http.ResponseWriter, r *http.Request ) {
+	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
 		b := &model.Book{}
@@ -116,9 +116,9 @@ func UpdateBook() http.HandlerFunc  {
 
 func DeleteBook() http.HandlerFunc {
 
-	return func(w http.ResponseWriter, r *http.Request ) {
+	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
-		
+
 		params := mux.Vars(r)
 		p_id, err := strconv.ParseInt(params["id"], 0, 64)
 		if err != nil {
@@ -131,7 +131,32 @@ func DeleteBook() http.HandlerFunc {
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
-		
+
+		w.WriteHeader(http.StatusOK)
+	}
+}
+
+func GetBooksByAuthor() http.HandlerFunc {
+
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+
+		params := mux.Vars(r)
+
+		authorName := params["name"]
+
+		res := model.GetBooksByAuthor(authorName)
+
+		if len(res) == 0 {
+			w.WriteHeader(http.StatusNotFound)
+			return
+		}
+
+		if err := json.NewEncoder(w).Encode(res); err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+
 		w.WriteHeader(http.StatusOK)
 	}
 }

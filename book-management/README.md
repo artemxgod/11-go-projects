@@ -58,7 +58,7 @@
     ]
     ```
     - `GET /book/{id}` seeks for book in db and responds with a matching `id` book
-    - Respond example:
+    - Respond example for `/book/1`:
     ```json
     {
     "ID": 1,
@@ -84,7 +84,7 @@
     }
     ```
     - `PUT /book/{id}` changes matching with id movie's data. Respond with updated data in json or error
-    - Respond example:
+    - Respond example for `/book/1`:
     ```json
     {
     "ID": 1,
@@ -97,7 +97,7 @@
     }
     ```
     - `DELETE /book/{id}` deletes matching with id book from db. Respond with what left from it in database
-    - Respond example:
+    - Respond example for `/book/1`:
     ```json
     {
     "ID": 0,
@@ -108,4 +108,28 @@
     "author": "",
     "publication": ""
     }
+    ```
+    - `GET /book/author/{name}` responds with list of books with matching author
+    - Respond example for `/book/author/Virtus`:
+    ```json
+    [
+        {
+            "ID": 1,
+            "CreatedAt": "2023-01-30T12:29:07+03:00",
+            "UpdatedAt": "2023-01-30T12:29:07+03:00",
+            "DeletedAt": null,
+            "name": "The end",
+            "author": "Virtus",
+            "publication": "Nemo prod"
+        },
+        {
+            "ID": 2,
+            "CreatedAt": "2023-01-30T12:29:14+03:00",
+            "UpdatedAt": "2023-01-30T12:29:14+03:00",
+            "DeletedAt": null,
+            "name": "The end 2",
+            "author": "Virtus",
+            "publication": "Nemo prod"
+        }
+    ]
     ```
